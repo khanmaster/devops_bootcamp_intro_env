@@ -103,9 +103,29 @@ Common commands:
 - Creating env var `export key=value` 
 - `export name=shahrukh`
 - `printenv name`
-- 
+- `export DB_HOST="mongodb://192.168.10.150:27017/posts"`
 
 
+
+### Reverse Proxy with Nginx
+![](images/Screenshot%20(152).png)
+```
+
+server {
+    listen 80;
+
+    server_name _;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
 
 
 
